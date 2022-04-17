@@ -27,14 +27,27 @@ from traceback import print_list
 
 strength = int(input("how many characters your password is? "))
 
-def password(strength):
+def generator(strength):
     rndmpassword = ""
     password = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-    while strength <=4:
-        print(f"your password is too short.")
-        strength = int(input("please re-input: "))
     for i in range(strength):
         rndmpassword = rndmpassword + random.choice(password)
+    print(f"your password is: {rndmpassword}")
+
+
+def password(strength):
+    if strength <= 4:
+        while strength <=4:
+            print(f"your password is too short.")
+            strength = int(input("please re-input: "))
+            #print(strength)
+            if strength > 4:
+                generator(strength)
+                break
+            else:
+                continue
+    else:
+        generator(strength)
 
 password(strength)
             
