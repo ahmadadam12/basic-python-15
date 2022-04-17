@@ -15,9 +15,9 @@ sntc = input("please enter a sentence to be reversed: ")
 
 def rvsword(sntc):
     splitSntc = sntc.split()
-    print(splitSntc)
+    #print(splitSntc)
     rvsSplit = splitSntc[::-1]
-    print(rvsSplit)
+    #print(rvsSplit)
     rvsSntc = " ".join(rvsSplit)
     print(rvsSntc)
 
