@@ -20,9 +20,9 @@ to generate.
 
 num = int(input("how many number of fibonacci do you want? "))
 a = [1]
-b = range(0, num-1)
 z = [1]
 def fibonacci(num):
+    b = range(0, num-1)
     for i in b:
         f = a[i] + a[i-1]
         a.append(f)
