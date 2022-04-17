@@ -1,3 +1,5 @@
-thisset = {"apple", "banana", "cherry", "apple"}
+import random
 
-print(thisset)
+mylist = ["apple", "banana", "cherry"]
+
+print(random.choice(mylist))
