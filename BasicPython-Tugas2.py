@@ -43,8 +43,6 @@ def action(choice):
     elif choice == 3:
         #program selesai
         print(f"Program selesai!\nSampai jumpa!\n")
-        #start = ""
-        #menu(start)
     else:
         print(f"Menu tidak tersedia")
         start = ""
