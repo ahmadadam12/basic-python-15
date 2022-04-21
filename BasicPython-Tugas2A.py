@@ -38,7 +38,7 @@ def action(choice):
         telp.append(new_telp)
         #print(nama)
         #print(telp)   
-        start = input("Kontak baru berhasil ditambahkan.\nTekan Enter untuk kembali ke Menu.")
+        start = input("\nKontak baru berhasil ditambahkan.\nTekan Enter untuk kembali ke Menu.\n")
         menu(start)
     elif choice == 3:
         #program selesai
