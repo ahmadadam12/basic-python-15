@@ -10,5 +10,8 @@ the even elements of this list in it.
 
 a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 b = [i for i in a if i%2 ==0]
+c = list(i for i in a if i%2 ==0)
 
-print(b)
+print(c)
+print(type(b))
+print(type(c))
