@@ -6,6 +6,7 @@ This file is Peter Norvig’s compilation of the dictionary of words used
 in professional Scrabble tournaments. 
 Each line in the file contains a single word
 
+CONTINUIE TO EXERCISE 31
 """
 
 import random
