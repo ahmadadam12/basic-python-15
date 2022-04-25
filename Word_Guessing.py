@@ -1,6 +1,4 @@
-from operator import length_hint
 import random
-from re import I
 
 start = input(">>> Welcome to the game!\n_ _ _ _ _ _ _ _ _\nRule:\n1. You have to guess the word randomly chosen.\n2. There will be suggestion for you.\n3. You can take a hint.\npush enter to continue!")
 
@@ -28,7 +26,6 @@ def pilih(choice):
     else:
         print("wrong input")
 
-
 def pilih1(choice):
         i = 1
         while i <= 3:
@@ -50,25 +47,25 @@ def pilih2(choice, str1):
     found = [pos for pos, char in enumerate(word) if guess == char]
     y = 1
     maxTry = len(word)-2
-    if maxTry-y == 0:
-        print("Game over")
+    hintSlot = maxTry-y
+    while y <= maxTry and hintSlot != 0:
+        if guess in word:
+            #print(str1)
+            for x in found:
+                str1 = str1[:x] + guess + str1[x+1: ]
+            print(str1)
+            y += 1
+            print(f"your hint slot is: {hintSlot}")
+            choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint\n"))
+            pilih(choice)
+        else:
+            print("incorrect")
+            y += 1
+            print(f"your hint slot is: {hintSlot}")
+            choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint"))
+            pilih(choice)
     else:
-        while y <= maxTry:
-            if guess in word:
-                #print(str1)
-                for x in found:
-                    str1 = str1[:x] + guess + str1[x+1: ]
-                print(str1)
-                y += 1
-                print(f"your hint slot is: {maxTry-y}")
-                choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint\n"))
-                pilih(choice)
-            else:
-                print("incorrect")
-                y += 1
-                print(f"your hint slot is: {maxTry-y}")
-                choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint"))
-                pilih(choice)
+        print("game over")
 
 
 guessWord = (input("Input your word guess: ")).upper()
