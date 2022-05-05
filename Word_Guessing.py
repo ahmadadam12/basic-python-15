@@ -15,64 +15,55 @@ last = word[-1]
 str1 = "_"*len(word)
 str1 = first + str1[1:(len(word)-1)] + last
 str2 = str1
-print(str1)
+print(str1)  
 
-
-def pilih(choice):
-    if choice == 1:
-        pilih1(choice)
-    elif choice == 2:
-        pilih2(choice, str1)
+def pilih1(choice, i):
+    answer = input("input your answer: ")
+    answer = answer.upper()
+    if answer == word:
+        print(f"You are correct. The word is: {word}")
     else:
-        print("wrong input")
+        print("The answer is wrong")
+        i += 1
+    print(f"wrong. the word is: {word}")      
 
-def pilih1(choice):
-        i = 1
-        while i <= 3:
-            answer = input("input your answer: ")
-            answer = answer.upper()
-            if answer == word:
-                print(f"You are correct. The word is: {word}")
-                break
-            else:
-                print("The answer is wrong")
-                choice = int(input("Incorrect. What do you want?\n1. Guess again?\n2. Take a hint\n"))
-                i += 1
-                pilih(choice)
-                continue
-        print(f"wrong. the word is: {word}")
-
-def pilih2(choice, str1):
+def pilih2(choice, str1, i):
     guess = (input("Input your guess: ")).upper()
     found = [pos for pos, char in enumerate(word) if guess == char]
-    y = 1
-    maxTry = len(word)-2
-    hintSlot = maxTry-y
-    while y <= maxTry and hintSlot != 0:
-        if guess in word:
-            #print(str1)
-            for x in found:
-                str1 = str1[:x] + guess + str1[x+1: ]
-            print(str1)
-            y += 1
-            print(f"your hint slot is: {hintSlot}")
-            choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint\n"))
-            pilih(choice)
-        else:
-            print("incorrect")
-            y += 1
-            print(f"your hint slot is: {hintSlot}")
-            choice = int(input("Do you want to guess or hint?\n1.guess\n2.hint"))
-            pilih(choice)
+    maxTry = len(word)
+    if guess in word:
+        #print(str1)
+        for x in found:
+            str1 = str1[:x] + guess + str1[x+1: ]
+        print(str1)
+        i +=1
+        hintSlot = maxTry-i
+        print(f"your hint slot is: {hintSlot}")
     else:
-        print("game over")
+        print("incorrect")
+        i += 1
+        hintSlot = maxTry-i
+        print(f"your hint slot is: {hintSlot}")
+    return i
 
 
 guessWord = (input("Input your word guess: ")).upper()
 #found = [pos for pos, char in enumerate(word) if guess == char]
 
+
 if guessWord == word:
     print(f"Super! You are correct. The word is: {word}")
 else:
-    choice = int(input("Incorrect. What do you want?\n1. Guess again?\n2. Take a hint\n"))
-    pilih(choice)
+    print("your answer is incorrect")
+    i = 1
+    while True:
+        if i <= (len(word)-2):
+            choice = int(input("What do you want?\n1. Guess again?\n2. Take a hint\n"))
+            if choice == 1:
+                pilih1(choice, i)
+            elif choice == 2:
+                pilih2(choice, str1, i)
+            else:
+                print("wrong input")
+        else:
+            print("game over")

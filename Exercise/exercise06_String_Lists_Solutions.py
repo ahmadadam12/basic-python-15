@@ -35,7 +35,7 @@ print(range(len(word)))
 rvs = ""
 for i in range(len(word)):
     rvs = rvs + word[len(word)-1-i]
-    print(rvs)
+print(rvs)
 
 if word == rvs:
     print("palindrome")
