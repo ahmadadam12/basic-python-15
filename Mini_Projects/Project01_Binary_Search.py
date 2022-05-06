@@ -7,32 +7,39 @@ then check user value is bigger or smaller than the middle
 """
 
 import math
+import random
 
+print("This programm will randomly generates number between 0 and 100.\nYou can enter a guessed number to check your number is there or not.\nSucceding number will have different 2 from the low number.")
 
-low = int(input("Input lower value: "))
-high = int(input("Input high value: "))
+low = random.randint(0,50)
+high = random.randint(51,100)
 
-arr = list(range(low, high+2, 2))
-mid = math.ceil((len(arr)/2))-1
+print(f"low number: {low}\nhigh number: {high}")
+
+arr = list(range(low, high, 2))
+mid = math.ceil((len(arr)/2))
 print(arr)
-#print(mid)
+print(arr[mid])
 
 x = int(input("Input your guessing value: "))
 
 while len(arr)>2:
-    if x == arr[mid]:
+    if x == arr[mid] or x==arr[mid+1]:
         print("your number is here")
         break
     elif x > arr[mid]:
-        low = arr[mid+1]
-        arr = list(range(low, high+2, 2))
-        #print(arr)
-        mid = math.ceil((len(arr)/2))-1
-    elif x < arr[mid]:
-        high = arr[mid-1]
+        low = arr[mid]
         arr = list(range(low, high, 2))
+        mid = math.ceil((len(arr)/2))
         #print(arr)
-        mid = math.ceil((len(arr)/2))-1
+        #print(arr[mid])
+    elif x < arr[mid]:
+        high = arr[mid]
+        arr = list(range(low, high, 2))
+        mid = math.ceil((len(arr)/2))
+        #print(f"midd is: {mid}")
+        #print(arr)
+        #print(arr[mid])
 else:
     print("your number is not here")
 
