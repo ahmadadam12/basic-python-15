@@ -11,12 +11,15 @@ The program should also include a function that can randomly
 
 import random
 
+print("This is dice rolling program.")
 while True:
     choice = int(input("What do you want?\n1. Roll Dice\n2. Stop rolling\n"))
     if choice == 1:
         a = random.randint(1,6)
         print(f"Your rolling is: {a}\n")
-    else:
+    elif choice ==2:
         break
+    else:
+        print("You entered wrong number.\n")
 
 print("Thank you")

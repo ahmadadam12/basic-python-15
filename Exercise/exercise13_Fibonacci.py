@@ -27,7 +27,7 @@ def fibonacci(num):
         f = a[i] + a[i-1]
         a.append(f)
         z.append(a[i])
+    #print(a)
     print(z)
 
-fibonacci(num)   
-    
+fibonacci(num)
