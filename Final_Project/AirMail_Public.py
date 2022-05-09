@@ -87,11 +87,11 @@ while True:
             print("Login success!")
             login = True
         except:
-            print("Cannot find your account\nMay be you could lower your security.\nFor reference: https://myaccount.google.com/lesssecureapps")
+            print("Cannot find your account.\nMay be you could lower your security.\nFor reference: https://myaccount.google.com/lesssecureapps")
             continue
     else:
         pass
-    start = int(input("\nPlease choice your action:\n1. Add Contact (add first then send)\n2. Send Email\n3. View Contact\n4. Quit Program\n"))
+    start = int(input("\nPlease choice your action (input number):\n1. Add Contact (add first then send)\n2. Send Email\n3. View Contact\n4. Quit Program\n"))
     if start == 1:
         #add new contact to the book
         print("Please write these details:")
