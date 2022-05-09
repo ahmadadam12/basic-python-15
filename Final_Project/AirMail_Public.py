@@ -74,7 +74,7 @@ def send_email(need_attach):
 login = False
 while True:
     if login == False:
-        print("\n**Welcome to AirMail.exe**\n\nThis program is to send your email using GMail.")
+        print("\n**Welcome to AirMail.exe**\n\nThis program sends email using GMail.")
         print("Please Log in with your GMail account.")
         #defining email and password of sender:
         MY_ADDRESS = input("E-mail address: ")
@@ -124,7 +124,7 @@ while True:
             print(r, end=', ')
         subject = input("\nSubject: ")
         message_text = input("Message: ")    
-        need_attach = input("Put attachement? (y/n): ")
+        need_attach = input("Put an attachement? (y/n): ")
         #send_attachment(need_attach)
         send_email(need_attach)    
     elif start == 3:
