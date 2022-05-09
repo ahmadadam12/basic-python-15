@@ -118,8 +118,8 @@ while True:
         print("\n**Welcome to AirMail.exe**\n\nThis program sends email using GMail.")
         print("Please Log in with your GMail account.")
         #defining email and password of sender:
-        MY_ADDRESS = 'adampython5@gmail.com'#input("E-mail address: ")
-        PASSWORD = '@d4mPyth0n'#input("Password: ")
+        MY_ADDRESS = input("E-mail address: ")
+        PASSWORD = input("Password: ")
         try:
             s = smtplib.SMTP(host = 'smtp.gmail.com', port = 587)
             s.starttls()
