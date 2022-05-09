@@ -9,6 +9,7 @@ These codes credits go to:
 7. https://stackoverflow.com/questions/25346001/add-excel-file-attachment-when-sending-python-email
 8. https://realpython.com/python-send-email/#adding-attachments-using-the-email-package
 9. https://docs.python.org/3/library/email.message.html
+10. https://stackoverflow.com/questions/2507808/how-to-check-whether-a-file-is-empty-or-not
 """
 
 from email.mime.base import MIMEBase
@@ -19,6 +20,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import os
 
 def get_contacts(filename):
     #split name and email address from contact book file:
@@ -26,16 +28,24 @@ def get_contacts(filename):
     names = []
     global emails
     emails = []
+    global no_contact
     with open(filename, mode='r', encoding = 'utf-8')as contacts_file:
         for a_contact in contacts_file:
             names.append(a_contact.split()[0])
             emails.append(a_contact.split()[1])
-        return names, emails
+        #print(names)
+        #print(emails)
+        if os.stat(filename).st_size == 0:
+            no_contact = True
+        else:
+            no_contact = False
+        #print(no_contact)
+        return names, emails, no_contact
 
 def add_contact(new_contact):
     with open(contact_book, 'a', encoding = 'utf-8') as contact_list:
         contact_list.write(new_contact)
-
+    
 def send_email(need_attach):
     if need_attach == 'n':
         pass
@@ -71,15 +81,45 @@ def send_email(need_attach):
     #Terminate SMTP Session and close connection
     s.quit()
 
+def delete_contact():
+    try:
+        get_contacts(contact_book)
+        if no_contact == False:
+            for a_name,an_email in zip(names,emails):
+                print(a_name, " : ",an_email)
+            del_name = input("Select names from contact list to be deleted separated by comma (e.g: Andi,Budi): ")
+            del_name_list = del_name.split(",")
+            #print(del_name_list)
+            for a_name in del_name_list:
+                i = names.index(a_name)
+                del names[i]
+                del emails[i]
+                #print(names)
+                #print(emails)
+            list_o = []
+            for item in names:
+                i = names.index(item)
+                o = list(names[i] + " " + emails[i] + "\n")
+                list_o.append(o)
+            with open('receiverlist.txt', 'w') as am:
+                for item in list_o:
+                    am.writelines(item)
+            with open('receiverlist.txt', 'r') as am:
+                am.readlines()
+        else:
+            print("You don't have a contact. Please add a contact")
+    except:
+        print("There is no contact list. Please add a contact first.")
+
 login = False
+contact_book = 'receiverlist.txt'
 while True:
     if login == False:
         print("\n**Welcome to AirMail.exe**\n\nThis program sends email using GMail.")
         print("Please Log in with your GMail account.")
         #defining email and password of sender:
-        MY_ADDRESS = input("E-mail address: ")
-        PASSWORD = input("Password: ")
-        contact_book = 'receiverlist.txt'
+        MY_ADDRESS = 'adampython5@gmail.com'#input("E-mail address: ")
+        PASSWORD = '@d4mPyth0n'#input("Password: ")
         try:
             s = smtplib.SMTP(host = 'smtp.gmail.com', port = 587)
             s.starttls()
@@ -91,18 +131,22 @@ while True:
             continue
     else:
         pass
-    start = int(input("\nPlease choice your action (input number):\n1. Add Contact (add first then send)\n2. Send Email\n3. View Contact\n4. Quit Program\n"))
+    start = int(input("\nPlease choice your action (input number):\n1. Add Contact (add first then send)\n2. Send Email\n3. View Contact\n4. Delete Contact\n5. Quit Program\n"))
     if start == 1:
         #add new contact to the book
         print("Please write these details:")
         name_contact = input("Please write the name: ")
         mail_contact = input("Please write the e-mail address: ")
-        new_contact = name_contact + " " + mail_contact
+        new_contact = name_contact + " " + mail_contact + '\n'
         add_contact(new_contact)
     elif start == 2:
         #feature: able to choose recipient from contact book:
         try:
             get_contacts(contact_book)
+            if no_contact == False:
+                pass
+            else:
+                print("You don't have a contact. Please add a contact")
         except:
             print("There is no contact list. Please add a contact first.")
             continue
@@ -131,11 +175,16 @@ while True:
         #view contact book
         try:
             get_contacts(contact_book)
-            for a_name,an_email in zip(names,emails):
-                print(a_name, " : ",an_email)
+            if no_contact == False:
+                for a_name,an_email in zip(names,emails):
+                    print(a_name, " : ",an_email)
+            else:
+                print("You don't have a contact. Please add a contact")
         except:
             print("There is no contact list. Please add a contact first.")
     elif start == 4:
+        delete_contact()
+    elif start == 5:
         print("Thank you!")
         break
     else:
