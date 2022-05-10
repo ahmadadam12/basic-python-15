@@ -18,5 +18,3 @@ while True:
         print("your year is a leap year.")
     else:
         print("your year is not a leap year.")
-
-

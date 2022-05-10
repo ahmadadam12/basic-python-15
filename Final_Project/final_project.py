@@ -10,9 +10,13 @@ These codes credits go to:
 8. https://realpython.com/python-send-email/#adding-attachments-using-the-email-package
 9. https://docs.python.org/3/library/email.message.html
 10. https://stackoverflow.com/questions/2507808/how-to-check-whether-a-file-is-empty-or-not
+11. https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/
+12. https://stackoverflow.com/questions/35805078/how-do-i-convert-a-password-into-asterisks-while-it-is-being-entered
 """
 
 from email.mime.base import MIMEBase
+import getpass
+import stdiomask
 import smtplib
 import email
 from string import Template
@@ -119,7 +123,8 @@ while True:
         print("Please Log in with your GMail account.")
         #defining email and password of sender:
         MY_ADDRESS = input("E-mail address: ")
-        PASSWORD = input("Password: ")
+        #use getpass to hide the text, stdiomasuk to asterisk it
+        PASSWORD = stdiomask.getpass("Password: ")#input("Password: ")
         try:
             s = smtplib.SMTP(host = 'smtp.gmail.com', port = 587)
             s.starttls()
