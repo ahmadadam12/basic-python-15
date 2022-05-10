@@ -119,7 +119,7 @@ login = False
 contact_book = 'receiverlist.txt'
 while True:
     if login == False:
-        print("\n**Welcome to AirMail.exe**\n\nThis program sends email using GMail.")
+        print("\n**Welcome to AirMail.exe**\n***Visit Us @https://github.com/ahmadadam12***\n\nThis program sends email using GMail.")
         print("Please Log in with your GMail account.")
         #defining email and password of sender:
         MY_ADDRESS = input("E-mail address: ")
